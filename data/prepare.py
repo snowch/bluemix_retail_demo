@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-ONLINE_RETAIL_XLSX = 'OnlineRetail.xlsx'
-ONLINE_RETAIL_CSV  = 'OnlineRetail.csv'
+ONLINE_RETAIL_XLSX  = 'OnlineRetail.xlsx'
+ONLINE_RETAIL_CSV   = 'OnlineRetail.csv'
+ONLINE_RETAIL_JSON  = 'OnlineRetail.json'
 
 def download_spreadsheet():
     print('Starting download_spreadsheet() ...')
@@ -32,6 +33,7 @@ def create_csv():
     df = df.ix[df['Quantity'] > 0] 
     df.sort_values(by=['InvoiceTime', 'InvoiceNo'], inplace=True)
     df.to_csv(ONLINE_RETAIL_CSV, index=False, encoding='utf-8', header=False)
+    df.to_json('OnlineRetail.json', orient='records', lines=True, date_format='epoch', date_unit='s')
     print('Finished create_csv() ...')
 
 def compress_files():
@@ -39,7 +41,7 @@ def compress_files():
     import gzip
     import shutil
     
-    for filename in [ONLINE_RETAIL_XLSX, ONLINE_RETAIL_CSV]:
+    for filename in [ONLINE_RETAIL_XLSX, ONLINE_RETAIL_CSV, ONLINE_RETAIL_JSON]:
         with open(filename, 'rb') as f_in, gzip.open(filename + '.gz', 'wb') as f_out:
             shutil.copyfileobj(f_in, f_out)
     print('Finished compress_files() ...')
@@ -52,10 +54,10 @@ def remove_file(filename):
         pass
 
 if __name__ == "__main__":
-    for filename in [ONLINE_RETAIL_XLSX, ONLINE_RETAIL_CSV]:
+    for filename in [ONLINE_RETAIL_XLSX, ONLINE_RETAIL_CSV, ONLINE_RETAIL_JSON]:
         remove_file(filename)
 
-    for filename in [ONLINE_RETAIL_XLSX + '.gz', ONLINE_RETAIL_CSV + '.gz']:
+    for filename in [ONLINE_RETAIL_XLSX + '.gz', ONLINE_RETAIL_CSV + '.gz', ONLINE_RETAIL_JSON + '.gz']:
         remove_file(filename)
         
     download_spreadsheet()

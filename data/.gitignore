@@ -4,3 +4,5 @@ OnlineRetail.csv.gz
 OnlineRetail.csv
 __pycache__/
 *.pyc
+OnlineRetail.json
+OnlineRetail.json.gz
