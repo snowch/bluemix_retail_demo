@@ -1,0 +1,20 @@
+"messagehub": [ 
+	{ "credentials":
+		{
+		  "instance_id": "",
+		  "api_key": "",
+		  "kafka_admin_url": "",
+		  "kafka_rest_url": "",
+		  "kafka_brokers_sasl": [
+		    "",
+		    "",
+		    "",
+		    "",
+		    ""
+		  ],
+		  "user": "",
+		  "password": ""
+		}
+	} 
+] 
+
