@@ -22,20 +22,38 @@ def download_spreadsheet():
 def create_csv():
     print('Starting create_csv() ...')
     import pandas as pd
+    import datetime
+
     df = pd.read_excel(ONLINE_RETAIL_XLSX, sheetname='Online Retail')
-    
+
     # remove nan customer IDs
     df = df[pd.notnull(df['CustomerID'])] 
     df['CustomerID'] = df['CustomerID'].astype(int)
-    df['InvoiceTime'] = pd.DatetimeIndex(df['InvoiceDate']).time
 
-    # remove negative quantities
+    # remove negative quantities - this also removes non-numeric InvoiceNo's
     df = df.ix[df['Quantity'] > 0] 
 
     # Add a line number for each item in an invoice
     df['LineNo'] = df.groupby(['InvoiceNo']).cumcount()+1
 
+    # the dataset starts at approx 6am and finishes at approx 10pm
+    # we want to data to span 24 hours
+
+    df_AM = df.copy()
+    df_PM = df.copy()
+
+    df_AM['InvoiceNo'] = (df_AM['InvoiceNo'].astype('str') + '1').astype(int)
+    df_PM['InvoiceNo'] = (df_PM['InvoiceNo'].astype('str') + '2').astype(int)
+
+    df_PM['InvoiceDate'] = df_PM['InvoiceDate'] + datetime.timedelta(hours=12)
+
+    df = pd.concat([df_AM, df_PM])
+
+    # Sort dataframe
+    df['InvoiceTime'] = pd.DatetimeIndex(df['InvoiceDate']).time
     df.sort_values(by=['InvoiceTime', 'InvoiceNo'], inplace=True)
+
+    # finally save
     df.to_csv(ONLINE_RETAIL_CSV, index=False, encoding='utf-8', header=False)
     df.to_json('OnlineRetail.json', orient='records', lines=True, date_format='epoch', date_unit='s')
     print('Finished create_csv() ...')
