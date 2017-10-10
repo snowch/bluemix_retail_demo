@@ -31,6 +31,10 @@ def create_csv():
 
     # remove negative quantities
     df = df.ix[df['Quantity'] > 0] 
+
+    # Add a line number for each item in an invoice
+    df['LineNo'] = df.groupby(['InvoiceNo']).cumcount()+1
+
     df.sort_values(by=['InvoiceTime', 'InvoiceNo'], inplace=True)
     df.to_csv(ONLINE_RETAIL_CSV, index=False, encoding='utf-8', header=False)
     df.to_json('OnlineRetail.json', orient='records', lines=True, date_format='epoch', date_unit='s')
