@@ -1,0 +1,3 @@
+Flask
+kafka
+kafka-python
