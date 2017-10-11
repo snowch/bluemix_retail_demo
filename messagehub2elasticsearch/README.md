@@ -64,3 +64,24 @@ Run docker image locally
 ```
 docker run --rm -it --env KAFKA_USERNAME=changeme --env KAFKA_PASSWORD=changeme openretail-logstash:latest
 ```
+
+Now push to Bluemix Container repository
+
+```
+bx login -a https://api.eu-de.bluemix.net
+docker build . -t  registry.eu-de.bluemix.net/openretail/openretail-logstash:latest
+docker push registry.eu-de.bluemix.net/openretail/openretail-logstash:latest
+bx cr image-list
+```
+
+Now run in Kubernetes
+
+```
+bx cs init
+bx cs cluster-config my_kubernetes
+export KUBECONFIG=/Users/snowch/.bluemix/plugins/container-service/clusters/my_kubernetes/kube-config-par01-my_kubernetes.yml
+kubectl run --image registry.eu-de.bluemix.net/openretail/openretail-logstash:latest openretail-logstash --env="KAFKA_USERNAME=changeme" --env="KAFKA_PASSWORD=changeme"
+kubectl proxy
+```
+
+Navigate to URL returned by last command ^
