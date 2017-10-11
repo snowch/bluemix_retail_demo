@@ -132,9 +132,9 @@ def load_records(store_num):
 
                 # load the record - use an OrderedDict to keep the records in order
                 j = json.loads(line, object_pairs_hook=OrderedDict)
-                tx_time = datetime.datetime.fromtimestamp(int(j['InvoiceDate']))
+                tx_time = datetime.datetime.fromtimestamp(int(j['InvoiceDate'])/1000)
                 tx_time = tx_time.replace(year=rundate.year, month=rundate.month, day=rundate.day)
-                j['InvoiceDate']=int(tx_time.strftime('%s'))
+                j['InvoiceDate']=int(tx_time.strftime('%s')) * 1000
 
                 j['StoreID'] = int(store_num)
 
