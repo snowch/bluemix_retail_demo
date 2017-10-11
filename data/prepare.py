@@ -55,7 +55,7 @@ def create_csv():
 
     # finally save
     df.to_csv(ONLINE_RETAIL_CSV, index=False, encoding='utf-8', header=False)
-    df.to_json('OnlineRetail.json', orient='records', lines=True, date_format='epoch', date_unit='s')
+    df.to_json('OnlineRetail.json', orient='records', lines=True, date_format='epoch', date_unit='ms')
     print('Finished create_csv() ...')
 
 def compress_files():
