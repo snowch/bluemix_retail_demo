@@ -2,6 +2,7 @@
 
 from kafka import KafkaProducer
 from kafka.errors import KafkaError
+from kafka.producer.future import RecordMetadata
 
 import sys
 import ssl
@@ -84,21 +85,29 @@ def get_now(store_num, rundate):
     return now
 
 def write_lines_processed(lines_processed):
-    print(str(lines_processed))
+    #print(str(lines_processed))
     pass
     # TODO write stats to a kafka topic
     #with open('processed.log', 'w') as log_f:
     #    log_f.write(str(lines_processed))
 
 def write_tps(tps):
-    print(str(tps))
+    #print(str(tps))
     pass
     # TODO write stats to a kafka topic
     #with open('tps.log', 'w') as log_f:
     #    log_f.write(str(tps))
 
 def my_custom_log_method(args):
-    print(args)
+    if type(args) is RecordMetadata:
+        pass
+        # Ignore success as there will be so many - instead we should track failures?
+        # print('.', end="")    
+    elif type(args) is KafkaTimeoutError:
+        print('!', end="")
+        # KafkaTimeoutError: ('Batch containing %s record(s) expired due to timeout while requesting metadata from brokers for %s', 49, TopicPartition(topic='transactions_load', partition=2))
+    else:
+        print(args)
 
 def load_records(store_num):
 
