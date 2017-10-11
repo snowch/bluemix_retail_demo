@@ -4,7 +4,7 @@ The initial dataset is created with:
 
 ```
 # setup python libaries
-$ pip install -r requirements
+$ pip install -r requirements.txt
 ```
 and then 
 
