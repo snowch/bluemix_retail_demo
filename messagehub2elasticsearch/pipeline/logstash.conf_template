@@ -1,10 +1,6 @@
 input { 
 	kafka {
-		bootstrap_servers =>  "kafka04-prod01.messagehub.services.eu-de.bluemix.net:9093,kafka05-prod01.messagehub.services.eu-de.bluemix.net:9093,kafka01-prod01.messagehub.services.eu-de.bluemix.net:9093,kafka03-prod01.messagehub.services.eu-de.bluemix.net:9093,kafka02-prod01.messagehub.services.eu-de.bluemix.net:9093"
-		security_protocol => "SASL_SSL"
-		sasl_mechanism => "PLAIN"
-		jaas_path => "/usr/share/logstash/config/jaas.conf"
-		ssl_truststore_location => "/usr/lib/jvm/java-1.8.0-openjdk/jre/lib/security/cacerts"
+		bootstrap_servers =>  "**changeme**"
 		topics => [ "transactions_load" ]
 	}
 }
