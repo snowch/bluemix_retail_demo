@@ -3,5 +3,12 @@ The first phase will consist of realtime reporting on the daily sales.  For this
 The initial dataset is created with:
 
 ```
+# setup python libaries
+$ pip install -r requirements
+```
+and then 
+
+```
+# download and prepare the dataset
 $ python prepare.py
 ```
