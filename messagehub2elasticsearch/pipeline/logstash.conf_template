@@ -1,0 +1,34 @@
+input { 
+	kafka {
+		bootstrap_servers =>  "kafka04-prod01.messagehub.services.eu-de.bluemix.net:9093,kafka05-prod01.messagehub.services.eu-de.bluemix.net:9093,kafka01-prod01.messagehub.services.eu-de.bluemix.net:9093,kafka03-prod01.messagehub.services.eu-de.bluemix.net:9093,kafka02-prod01.messagehub.services.eu-de.bluemix.net:9093"
+		security_protocol => "SASL_SSL"
+		sasl_mechanism => "PLAIN"
+		jaas_path => "/usr/share/logstash/config/jaas.conf"
+		ssl_truststore_location => "/usr/lib/jvm/java-1.8.0-openjdk/jre/lib/security/cacerts"
+		topics => [ "transactions_load" ]
+	}
+}
+filter {
+  json {
+    source => "message"
+  }
+  mutate{
+    remove_field => ["kafka"]
+    remove_field => ["@version"]
+    remove_field => ["@timestamp"]
+    remove_field => ["message"]
+    remove_tag => ["multiline"]
+  }
+}
+output {
+	elasticsearch {
+  		hosts => [
+				"xxxx.composedb.com:xxxx",
+				"xxxx.composedb.com:xxxx"
+			]
+		ssl => true
+		user => "logstash_kafka"
+		password => "******"
+        	index => "pos_transactions"
+	}
+}
