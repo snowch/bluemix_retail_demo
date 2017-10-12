@@ -85,8 +85,7 @@ def get_now(store_num, rundate):
     return now
 
 def write_lines_processed(lines_processed):
-    #print(str(lines_processed))
-    pass
+    print(str(lines_processed), end=" ", flush=True)
     # TODO write stats to a kafka topic
     #with open('processed.log', 'w') as log_f:
     #    log_f.write(str(lines_processed))
@@ -98,7 +97,7 @@ def write_tps(tps):
     #with open('tps.log', 'w') as log_f:
     #    log_f.write(str(tps))
 
-def my_custom_log_method(args):
+def kafka_send_callback(args):
     if type(args) is RecordMetadata:
         pass
         # Ignore success as there will be so many - instead we should track failures?
@@ -153,12 +152,20 @@ def load_records(store_num):
                 if lines_processed == 0:
                     print('Processing first record', json.dumps(j))
 
-                if j['InvoiceTime'] != '00:00:00':
+                # Because we are adding a random element to the time, it may be that the clock wraps
+                # so we aren't able to compare the transaction date.  If we don't exclude transactions at the
+                # edge of the time window we may get stuck in this loop forever
+                if j['InvoiceTime'] > '00:00:02' and j['InvoiceTime'] < '23:52:00':
+                    approx_wait_cycles = 0
                     while tx_time > get_now(store_num, rundate):
                         time.sleep(0.25) # yield CPU
+                        approx_wait_cycles += 1
+                        if approx_wait_cycles > 1000:
+                            print("Waited a few cycles to process {} {}".format(j['TransactionID'], j['InvoiceDate']), flush=True)
+                            approx_wait_cycles = 0 # reset the counter so we only ouput every X cycles
 
                 # todo call back for printing error
-                producer.send(opts['topic-transactions'], key=j['TransactionID'], value=json.dumps(j).encode('utf-8')).add_both(my_custom_log_method)
+                producer.send(opts['topic-transactions'], key=j['TransactionID'], value=json.dumps(j).encode('utf-8')).add_both(kafka_send_callback)
                 lines_processed += 1
 
                 # print status every 100 records processed
