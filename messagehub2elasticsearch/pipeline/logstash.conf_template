@@ -26,5 +26,6 @@ output {
 		user => "logstash_kafka"
 		password => "******"
         	index => "pos_transactions"
+		document_id => "%{TransactionID}"
 	}
 }
