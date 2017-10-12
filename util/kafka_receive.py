@@ -16,11 +16,12 @@ logger.setLevel(logging.INFO)
 
 opts = {}
 
-if len(sys.argv) != 2:
-    print('Usage: kafka_receive <topic-name>')
-    sys.exit(-1)
+if len(sys.argv) != 3 or sys.argv[2] not in ('latest', 'earliest'):
+        print('Usage: kafka_receive <topic-name> latest|earliest')
+        sys.exit(-1)
 
 opts['topic'] = sys.argv[1]
+opts['auto.offset.reset'] = sys.argv[2]
 
 print('Attempting to connect to topic: ' + opts['topic'])
 
@@ -56,8 +57,11 @@ context.options &= ssl.OP_NO_TLSv1_1
 print ('connecting')
 
 # always use a new groupid to get all the data
-import uuid;
-group_id = uuid.uuid4()
+if opts['auto.offset.reset'] == 'earliest':
+   import uuid;
+   group_id = uuid.uuid4()
+else:
+   group_id = 'console-consumer-script'
 
 consumer = KafkaConsumer(
                          bootstrap_servers = opts['brokers'],
@@ -67,8 +71,12 @@ consumer = KafkaConsumer(
                          ssl_context = context,
                          sasl_mechanism = sasl_mechanism,
                          api_version = (0,10),
-                         auto_offset_reset = 'latest',
+                         auto_offset_reset = opts['auto.offset.reset'],
                          group_id = group_id)
+
+if opts['topic'] not in consumer.topics():
+    print("\n** ERROR: Topic '{}' not found - have you spelt it correctly? Available topics: {} **".format(opts['topic'], consumer.topics()))
+    sys.exit(-1)
 
 consumer.subscribe(opts['topic'])
 
