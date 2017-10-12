@@ -10,6 +10,7 @@ from kafka import KafkaProducer, KafkaConsumer
 from kafka.errors import KafkaError
 from kafka.producer.future import RecordMetadata
 
+from collections import OrderedDict
 import sys
 import ssl
 import json
@@ -136,10 +137,10 @@ for msg in consumer:
 
     #if prob_cancelled > 0.5:
 
-    prediction = {
-            'transaction_id': transaction_id,
-            'prob_cancelled': prob_cancelled
-            }
+    prediction =  OrderedDict([    
+            ('transaction_id', transaction_id),
+            ('prob_cancelled', prob_cancelled)
+            ])
 
     producer.send(opts['topic-predictions'], key=j['TransactionID'], value=json.dumps(prediction).encode('utf-8')).add_both(kafka_send_callback)
 
