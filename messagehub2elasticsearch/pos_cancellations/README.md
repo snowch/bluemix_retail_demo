@@ -14,12 +14,9 @@ PUT pos_cancellation_probability/logs/_mapping
    "logs" : {
         "dynamic": "strict",
         "properties" : {
-            "transaction_id": {
-                "type": "long"
-                    },
-            "prob_cancelled": {
-                "type": "double"
-                    }
+            "transaction_id": { "type": "long" },
+	    "invoice_date":   { "type": "date" },
+            "prob_cancelled": { "type": "double" }
         }
     }
 }

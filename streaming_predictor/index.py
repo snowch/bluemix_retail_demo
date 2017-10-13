@@ -127,6 +127,7 @@ for msg in consumer:
     customer_id = j['CustomerID']
     quantity = j['Quantity']
     price = j['UnitPrice']
+    tx_datetime = j['InvoiceDate']
 
     data = np.array([[price, quantity, customer_id]])
 
@@ -139,6 +140,7 @@ for msg in consumer:
 
     prediction =  OrderedDict([    
             ('transaction_id', transaction_id),
+            ('invoice_date',   tx_datetime),
             ('prob_cancelled', prob_cancelled)
             ])
 
