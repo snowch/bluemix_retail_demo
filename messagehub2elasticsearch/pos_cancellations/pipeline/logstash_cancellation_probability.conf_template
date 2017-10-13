@@ -1,0 +1,31 @@
+input { 
+	kafka {
+		bootstrap_servers =>  "**changeme**"
+		topics => [ "transactions_predictions" ]
+	}
+}
+filter {
+  json {
+    source => "message"
+  }
+  mutate{
+    remove_field => ["kafka"]
+    remove_field => ["@version"]
+    remove_field => ["@timestamp"]
+    remove_field => ["message"]
+    remove_tag => ["multiline"]
+  }
+}
+output {
+	elasticsearch {
+  		hosts => [
+				"xxxx.composedb.com:xxxx",
+				"xxxx.composedb.com:xxxx"
+			]
+		ssl => true
+		user => "logstash_kafka"
+		password => "******"
+        	index => "pos_cancellation_probability"
+		document_id => "%{transaction_id}"
+	}
+}

@@ -1,0 +1,2 @@
+pipeline/logstash_cancellation_probability.conf_template
+pipeline/.gitignore

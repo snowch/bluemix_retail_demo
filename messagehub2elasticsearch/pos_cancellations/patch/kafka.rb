@@ -1,0 +1,6 @@
+      props.put("security.protocol", 'SASL_SSL')
+      props.put("sasl.mechanism", 'PLAIN')
+      props.put("ssl.protocol", "TLSv1.2")
+      props.put("ssl.enabled.protocols", "TLSv1.2")
+      props.put("ssl.endpoint.identification.algorithm", "HTTPS")
+      props.put("sasl.jaas.config", "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"#{ENV['KAFKA_USERNAME']}\" password=\"#{ENV['KAFKA_PASSWORD']}\";")
