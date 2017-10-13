@@ -151,7 +151,7 @@ def load_records(store_num):
                 j['StoreID'] = int(store_num)
 
                 # TODO - use 3 digits for store, 4 for line num
-                j['TransactionID'] = str(j['InvoiceNo']) + str(j['LineNo']) + str(store_num)
+                j['TransactionID'] = str(j['InvoiceNo']) + str(j['LineNo']) + str(store_num) + tx_dt.strftime('%y%m%d')
 
                 if lines_processed == 0:
                     print('Processing first record', json.dumps(j))
