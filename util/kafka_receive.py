@@ -57,7 +57,8 @@ context.options &= ssl.OP_NO_TLSv1_1
 print ('connecting')
 
 # always use a new groupid to get all the data
-if opts['auto.offset.reset'] == 'earliest':
+#if opts['auto.offset.reset'] == 'earliest':
+if True: 
    import uuid;
    group_id = uuid.uuid4()
 else:
