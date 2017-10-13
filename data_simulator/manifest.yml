@@ -1,9 +1,9 @@
 applications:
  - name: data_simulator
+   route: data_simulator
    memory: 128M
    instances: 2
    health-check-type: process 
-   no-route: true
    env:
            TRANSACTIONS_TOPIC: transactions_load
            METRICS_TOPIC: transactions_metrics
