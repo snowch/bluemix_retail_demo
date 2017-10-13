@@ -1,0 +1,15 @@
+#!/bin/bash 
+
+set -e
+
+export VCAP_SERVICES="{$(cat ../config/message_hub_vcap.json)}"
+
+export timestamp=$(python3 -c 'import time; print(int(round(time.time() * 1000)), end="")')
+
+export tx_id=$(python3 -c 'import uuid; print(uuid.uuid1().int>>64, end="")')
+
+export data='{"TransactionID":"'${tx_id}'","InvoiceNo":5488202,"StockCode":"M","Description":"Manual","Quantity":1,"InvoiceDate":'${timestamp}',"UnitPrice":2053.07,"CustomerID":12744,"Country":"Singapore","LineNo":1}'
+
+python ./kafka_send.py transactions_load $data
+
+echo Sent $data
