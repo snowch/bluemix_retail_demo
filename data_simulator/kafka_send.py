@@ -75,15 +75,11 @@ def get_producer():
                          )
     return producer
 
-def get_now(store_num, rundate):
+def get_offset_s(store_num):
     offset = 0
     if store_num != 0:
         offset = randint(-60, 60)
-
-    now = datetime.datetime.now()
-    now = now + datetime.timedelta(seconds=offset)
-    now = now.replace(year=rundate.year, month=rundate.month, day=rundate.day)
-    return now
+    return offset
 
 def write_lines_processed(lines_processed):
     print(str(lines_processed), end=" ", flush=True)
@@ -119,10 +115,12 @@ def load_records(store_num):
         # if we've already run today, keep skipping until tomorrow
         rundate = datetime.datetime.now()
         rundate_yyyymmdd = rundate.strftime("%Y%m%d")
-        if rundate in runon:
-            print('runon{} contains {} - skipping.'.format(runon, rundate_yyyymmdd))
+        if rundate_yyyymmdd in runon:
+            print('runon{} contains {} - waiting until tomorrow before processing again.'.format(runon, rundate_yyyymmdd))
             time.sleep(600) # sleep 10 minutes
             continue
+        else:
+            print("runon{} doesn't contains {} - processing file.".format(runon, rundate_yyyymmdd))
 
         print('Starting new loop')
 
@@ -143,6 +141,8 @@ def load_records(store_num):
                 j = json.loads(line, object_pairs_hook=OrderedDict)
                 tx_dt = datetime.datetime.fromtimestamp(int(j['InvoiceDate'])/1000)
                 tx_dt = tx_dt.replace(year=rundate.year, month=rundate.month, day=rundate.day)
+                # add some randomness to the invoicedate
+                tx_dt = tx_dt + datetime.timedelta(seconds=get_offset_s(store_num))
               
                 tx_time = tx_dt.strftime('%H:%M:%S')
                 j['InvoiceTime'] = tx_time
@@ -156,24 +156,21 @@ def load_records(store_num):
                 if lines_processed == 0:
                     print('Processing first record', json.dumps(j))
 
-                # Because we are adding a random element to the time, it may be that the clock wraps
-                # so we aren't able to compare the transaction date.  If we don't exclude transactions at the
-                # edge of the time window we may get stuck in this loop forever
-                if tx_time > '00:00:02' and tx_time < '23:52:00':
-                    approx_wait_cycles = 0
-                    while tx_dt > get_now(store_num, rundate):
-                        time.sleep(0.25) # yield CPU
-                        approx_wait_cycles += 1
-                        if approx_wait_cycles > 1000:
-                            print("Waited a few cycles to process {} {}".format(j['TransactionID'], j['InvoiceDate']), flush=True)
-                            approx_wait_cycles = 0 # reset the counter so we only ouput every X cycles
+                approx_wait_cycles = 0
+                while datetime.datetime.now() < tx_dt:
+                    # it isn't time to send our transaction yet
+                    time.sleep(0.25) # yield CPU
+                    approx_wait_cycles += 1
+                    if approx_wait_cycles > 1000:
+                        print("Waited a few cycles to process {} {}".format(j['TransactionID'], j['InvoiceDate']), flush=True)
+                        approx_wait_cycles = 0 # reset the counter so we only ouput every X cycles
 
                 # todo call back for printing error
-                producer.send(opts['topic-transactions'], key=j['TransactionID'], value=json.dumps(j).encode('utf-8')).add_both(kafka_send_callback)
+                #producer.send(opts['topic-transactions'], key=j['TransactionID'], value=json.dumps(j).encode('utf-8')).add_both(kafka_send_callback)
                 lines_processed += 1
 
-                # print status every 100 records processed
-                if lines_processed < 100 or lines_processed > 2670000 or lines_processed % 100 == 0:
+                # print status every 10000 records processed
+                if lines_processed < 10 or lines_processed % 10000 == 0:
                     write_lines_processed(lines_processed)
 
                 if lines_processed % 1000 == 0:
@@ -185,7 +182,6 @@ def load_records(store_num):
             producer.close()
             print('Finished processing records. Flushed and Closed producer ...')
 
-            #rundate = time.strftime("%Y%m%d")
             runon.append(rundate_yyyymmdd)
             print('Added {} to runon{}'.format(rundate_yyyymmdd, runon))
 
