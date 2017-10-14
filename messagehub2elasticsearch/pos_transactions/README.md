@@ -64,5 +64,3 @@ kubectl proxy
 ```
 
 Navigate to URL returned by last command ^
-
-TODO: create a kubernetes yaml descriptor for this
