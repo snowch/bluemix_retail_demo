@@ -58,7 +58,11 @@ Now run in Kubernetes
 ```
 bx cs init
 bx cs cluster-config my_kubernetes
-export KUBECONFIG=/Users/snowch/.bluemix/plugins/container-service/clusters/my_kubernetes/kube-config-par01-my_kubernetes.yml
+```
+
+Execute the line `export KUBECONFIG=...` returned from the previous command
+
+```
 kubectl create -f replication.yaml
 kubectl proxy
 ```
