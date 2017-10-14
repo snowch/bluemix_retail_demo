@@ -1,6 +1,7 @@
-Copy pipeline/logstash*.conf_template to pipeline/logstash*.conf
-
-Update pipeline/logstash*.conf to point to your elasticsearch server
+- Copy replication.yaml_template to replication.yaml
+- Update replication.yaml with your kafka credentials
+- Copy pipeline/logstash*.conf_template to pipeline/logstash*.conf
+- Update pipeline/logstash*.conf to point to your elasticsearch server
 
 Using Kibana or vanilla rest API - create index and mapping:
 
@@ -58,7 +59,7 @@ Now run in Kubernetes
 bx cs init
 bx cs cluster-config my_kubernetes
 export KUBECONFIG=/Users/snowch/.bluemix/plugins/container-service/clusters/my_kubernetes/kube-config-par01-my_kubernetes.yml
-kubectl run --image registry.eu-de.bluemix.net/openretail/openretail-logstash-pos-transactions:latest openretail-logstash-pos-transactions --env="KAFKA_USERNAME=changeme" --env="KAFKA_PASSWORD=changeme"
+kubectl create -f replication.yaml
 kubectl proxy
 ```
 

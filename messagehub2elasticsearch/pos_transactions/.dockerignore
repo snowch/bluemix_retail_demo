@@ -1,2 +1,4 @@
 pipeline/logstash_transactions.conf_template
 pipeline/.gitignore
+replication.yaml
+replication.yaml_template
