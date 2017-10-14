@@ -166,7 +166,7 @@ def load_records(store_num):
                         approx_wait_cycles = 0 # reset the counter so we only ouput every X cycles
 
                 # todo call back for printing error
-                #producer.send(opts['topic-transactions'], key=j['TransactionID'], value=json.dumps(j).encode('utf-8')).add_both(kafka_send_callback)
+                producer.send(opts['topic-transactions'], key=j['TransactionID'], value=json.dumps(j).encode('utf-8')).add_both(kafka_send_callback)
                 lines_processed += 1
 
                 # print status every 10000 records processed
