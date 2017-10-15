@@ -6,15 +6,14 @@
 Using Kibana or vanilla rest API - create index and mapping:
 
 ```
-DELETE pos_transactions
-
-PUT pos_transactions
-
-PUT pos_transactions/logs/_mapping
+PUT _template/pos-transactions
 {
-   "logs" : {
+  "template": "pos-transactions*",
+  "mappings": {
+    "logs" : {
         "dynamic": "strict",
         "properties" : {
+            "@timestamp":    { "type": "text" },
             "Description":   { "type": "text" },
             "InvoiceNo":     { "type": "long" },
             "CustomerID":    { "type": "long" },
@@ -29,6 +28,7 @@ PUT pos_transactions/logs/_mapping
             "LineNo":        { "type": "long" }
         }
     }
+  }
 }
 ```
 
@@ -47,7 +47,8 @@ docker run --rm -it --env KAFKA_USERNAME=changeme --env KAFKA_PASSWORD=changeme 
 Now push to Bluemix Container repository
 
 ```
-bx login -a https://api.eu-de.bluemix.net
+bx login -a https://api.eu-de.bluemix.net --apikey=@../../config/apiKey.json
+bx target -o chris.snow@uk.ibm.com -s retail_demo
 docker build . -t  registry.eu-de.bluemix.net/openretail/openretail-logstash-pos-transactions:latest
 docker push registry.eu-de.bluemix.net/openretail/openretail-logstash-pos-transactions:latest
 bx cr image-list
