@@ -13,7 +13,7 @@ PUT _template/pos-transactions
     "logs" : {
         "dynamic": "strict",
         "properties" : {
-            "@timestamp":    { "type": "text" },
+            "@timestamp":    { "type": "date" },
             "Description":   { "type": "text" },
             "InvoiceNo":     { "type": "long" },
             "CustomerID":    { "type": "long" },
