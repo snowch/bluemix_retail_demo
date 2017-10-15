@@ -5,20 +5,20 @@ Update pipeline/logstash*.conf to point to your elasticsearch server
 Using Kibana or vanilla rest API - create index and mapping:
 
 ```
-DELETE pos_cancellation_probability
-
-PUT pos_cancellation_probability
-
-PUT pos_cancellation_probability/logs/_mapping
+PUT _template/pos-cancellations
 {
-   "logs" : {
+  "template": "pos-cancellations*",
+  "mappings": {
+    "logs" : {
         "dynamic": "strict",
         "properties" : {
+            "@timestamp":    { "type": "date" },
             "transaction_id": { "type": "long" },
 	    "invoice_date":   { "type": "date" },
             "prob_cancelled": { "type": "double" }
         }
     }
+  }
 }
 ```
 
@@ -37,22 +37,24 @@ docker run --rm -it --env KAFKA_USERNAME=changeme --env KAFKA_PASSWORD=changeme 
 Now push to Bluemix Container repository
 
 ```
-bx login -a https://api.eu-de.bluemix.net
+bx login -a https://api.eu-de.bluemix.net --apikey=@../../config/apiKey.json
+bx target -o chris.snow@uk.ibm.com -s retail_demo
 docker build . -t  registry.eu-de.bluemix.net/openretail/openretail-logstash-pos-cancellation-probability:latest
 docker push registry.eu-de.bluemix.net/openretail/openretail-logstash-pos-cancellation-probability:latest
 bx cr image-list
 ```
-
 Now run in Kubernetes
 
 ```
 bx cs init
 bx cs cluster-config my_kubernetes
-export KUBECONFIG=/Users/snowch/.bluemix/plugins/container-service/clusters/my_kubernetes/kube-config-par01-my_kubernetes.yml
-kubectl run --image registry.eu-de.bluemix.net/openretail/openretail-logstash-pos-cancellation-probability:latest openretail-logstash-pos-cancellation-probability --env="KAFKA_USERNAME=changeme" --env="KAFKA_PASSWORD=changeme"
+```
+
+Execute the line `export KUBECONFIG=...` returned from the previous command
+
+```
+kubectl create -f replication.yaml
 kubectl proxy
 ```
 
 Navigate to URL returned by last command ^
-
-TODO: create a kubernetes yaml descriptor for this

@@ -8,10 +8,12 @@ filter {
   json {
     source => "message"
   }
+  date {
+    match => [ "invoice_date", "UNIX_MS" ]
+  }
   mutate{
     remove_field => ["kafka"]
     remove_field => ["@version"]
-    remove_field => ["@timestamp"]
     remove_field => ["message"]
     remove_tag => ["multiline"]
   }
@@ -25,7 +27,7 @@ output {
 		ssl => true
 		user => "logstash_kafka"
 		password => "******"
-        	index => "pos_cancellation_probability"
+        	index => "pos-cancellations-%{+YYYY.MM.dd}"
 		document_id => "%{transaction_id}"
 	}
 }
