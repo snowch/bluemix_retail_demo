@@ -1,0 +1,22 @@
+[
+  {
+    "_id": "8a0beef0-afec-11e7-a0e6-cfcd8ad60c5a",
+    "_type": "search",
+    "_source": {
+      "title": "Probability Cancelled > 0.5",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "_source"
+      ],
+      "sort": [
+        "_score",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"index\": \"pos-cancellations-*\",\n  \"highlightAll\": true,\n  \"version\": true,\n  \"filter\": [],\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"prob_cancelled:>0.5\",\n      \"analyze_wildcard\": true\n    }\n  }\n}"
+      }
+    }
+  }
+]

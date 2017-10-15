@@ -1,0 +1,22 @@
+[
+  {
+    "_id": "ee479220-afec-11e7-a0e6-cfcd8ad60c5a",
+    "_type": "search",
+    "_source": {
+      "title": "All Transactions Probability Cancelled",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "_source"
+      ],
+      "sort": [
+        "_score",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"index\": \"pos-cancellations-*\",\n  \"highlightAll\": true,\n  \"version\": true,\n  \"filter\": []\n}"
+      }
+    }
+  }
+]

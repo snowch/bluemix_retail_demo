@@ -1,0 +1,142 @@
+[
+  {
+    "_id": "a4105280-add2-11e7-bd24-517906546cf5",
+    "_type": "visualization",
+    "_source": {
+      "title": "Rolling Sales Revenue and Sales Quantity",
+      "visState": "{\n  \"aggs\": [\n    {\n      \"enabled\": true,\n      \"id\": \"1\",\n      \"params\": {\n        \"customLabel\": \"Unit Price\",\n        \"field\": \"UnitPrice\"\n      },\n      \"schema\": \"metric\",\n      \"type\": \"sum\"\n    },\n    {\n      \"enabled\": true,\n      \"id\": \"2\",\n      \"params\": {\n        \"customInterval\": \"2h\",\n        \"customLabel\": \"Transaction Time\",\n        \"extended_bounds\": {},\n        \"field\": \"InvoiceDate\",\n        \"interval\": \"s\",\n        \"min_doc_count\": 1\n      },\n      \"schema\": \"segment\",\n      \"type\": \"date_histogram\"\n    },\n    {\n      \"enabled\": true,\n      \"id\": \"3\",\n      \"params\": {\n        \"customLabel\": \"Quantity\",\n        \"field\": \"Quantity\"\n      },\n      \"schema\": \"metric\",\n      \"type\": \"sum\"\n    }\n  ],\n  \"listeners\": {},\n  \"params\": {\n    \"addLegend\": true,\n    \"addTimeMarker\": false,\n    \"addTooltip\": true,\n    \"categoryAxes\": [\n      {\n        \"id\": \"CategoryAxis-1\",\n        \"labels\": {\n          \"show\": true,\n          \"truncate\": 100\n        },\n        \"position\": \"bottom\",\n        \"scale\": {\n          \"type\": \"linear\"\n        },\n        \"show\": true,\n        \"style\": {},\n        \"title\": {\n          \"text\": \"Transaction Time\"\n        },\n        \"type\": \"category\"\n      }\n    ],\n    \"defaultYExtents\": false,\n    \"drawLinesBetweenPoints\": true,\n    \"grid\": {\n      \"categoryLines\": false,\n      \"style\": {\n        \"color\": \"#eee\"\n      },\n      \"valueAxis\": \"ValueAxis-1\"\n    },\n    \"interpolate\": \"linear\",\n    \"legendPosition\": \"right\",\n    \"radiusRatio\": 9,\n    \"scale\": \"linear\",\n    \"seriesParams\": [\n      {\n        \"data\": {\n          \"id\": \"1\",\n          \"label\": \"Unit Price\"\n        },\n        \"drawLinesBetweenPoints\": true,\n        \"interpolate\": \"cardinal\",\n        \"lineWidth\": 2,\n        \"mode\": \"normal\",\n        \"show\": true,\n        \"showCircles\": true,\n        \"type\": \"line\",\n        \"valueAxis\": \"ValueAxis-1\"\n      },\n      {\n        \"data\": {\n          \"id\": \"3\",\n          \"label\": \"Quantity\"\n        },\n        \"drawLinesBetweenPoints\": true,\n        \"interpolate\": \"cardinal\",\n        \"lineWidth\": 2,\n        \"mode\": \"normal\",\n        \"show\": true,\n        \"showCircles\": true,\n        \"type\": \"line\",\n        \"valueAxis\": \"ValueAxis-2\"\n      }\n    ],\n    \"setYExtents\": false,\n    \"showCircles\": true,\n    \"times\": [],\n    \"valueAxes\": [\n      {\n        \"id\": \"ValueAxis-1\",\n        \"labels\": {\n          \"filter\": false,\n          \"rotate\": 0,\n          \"show\": true,\n          \"truncate\": 100\n        },\n        \"name\": \"LeftAxis-1\",\n        \"position\": \"left\",\n        \"scale\": {\n          \"mode\": \"normal\",\n          \"type\": \"linear\"\n        },\n        \"show\": true,\n        \"style\": {},\n        \"title\": {\n          \"text\": \"Unit Price\"\n        },\n        \"type\": \"value\"\n      },\n      {\n        \"id\": \"ValueAxis-2\",\n        \"labels\": {\n          \"filter\": false,\n          \"rotate\": 0,\n          \"show\": true,\n          \"truncate\": 100\n        },\n        \"name\": \"RightAxis-1\",\n        \"position\": \"right\",\n        \"scale\": {\n          \"mode\": \"normal\",\n          \"type\": \"linear\"\n        },\n        \"show\": true,\n        \"style\": {},\n        \"title\": {\n          \"text\": \"Units\"\n        },\n        \"type\": \"value\"\n      }\n    ]\n  },\n  \"title\": \"Rolling Sales Revenue and Sales Quantity\",\n  \"type\": \"line\"\n}",
+      "uiStateJSON": "{\n  \"vis\": {\n    \"colors\": {\n      \"Average Quantity\": \"#967302\"\n    }\n  }\n}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"index\": \"pos-transactions-*\",\n  \"query\": {\n    \"query_string\": {\n      \"analyze_wildcard\": true,\n      \"query\": \"*\"\n    }\n  },\n  \"filter\": []\n}"
+      }
+    }
+  },
+  {
+    "_id": "36021af0-af33-11e7-8b7c-4fc3041cdacb",
+    "_type": "visualization",
+    "_source": {
+      "title": "Rolling Sales Revenue",
+      "visState": "{\n  \"title\": \"Rolling Sales Revenue\",\n  \"type\": \"line\",\n  \"params\": {\n    \"addLegend\": true,\n    \"addTimeMarker\": false,\n    \"addTooltip\": true,\n    \"categoryAxes\": [\n      {\n        \"id\": \"CategoryAxis-1\",\n        \"labels\": {\n          \"show\": true,\n          \"truncate\": 100\n        },\n        \"position\": \"bottom\",\n        \"scale\": {\n          \"type\": \"linear\"\n        },\n        \"show\": true,\n        \"style\": {},\n        \"title\": {\n          \"text\": \"Transaction Time\"\n        },\n        \"type\": \"category\"\n      }\n    ],\n    \"defaultYExtents\": false,\n    \"drawLinesBetweenPoints\": true,\n    \"grid\": {\n      \"categoryLines\": false,\n      \"style\": {\n        \"color\": \"#eee\"\n      },\n      \"valueAxis\": \"ValueAxis-1\"\n    },\n    \"interpolate\": \"linear\",\n    \"legendPosition\": \"bottom\",\n    \"radiusRatio\": 9,\n    \"scale\": \"linear\",\n    \"seriesParams\": [\n      {\n        \"data\": {\n          \"id\": \"1\",\n          \"label\": \"Unit Price\"\n        },\n        \"drawLinesBetweenPoints\": true,\n        \"interpolate\": \"cardinal\",\n        \"lineWidth\": 2,\n        \"mode\": \"normal\",\n        \"show\": true,\n        \"showCircles\": true,\n        \"type\": \"line\",\n        \"valueAxis\": \"ValueAxis-1\"\n      }\n    ],\n    \"setYExtents\": false,\n    \"showCircles\": true,\n    \"times\": [],\n    \"valueAxes\": [\n      {\n        \"id\": \"ValueAxis-1\",\n        \"labels\": {\n          \"filter\": false,\n          \"rotate\": 0,\n          \"show\": true,\n          \"truncate\": 100\n        },\n        \"name\": \"LeftAxis-1\",\n        \"position\": \"left\",\n        \"scale\": {\n          \"mode\": \"normal\",\n          \"type\": \"linear\"\n        },\n        \"show\": true,\n        \"style\": {},\n        \"title\": {\n          \"text\": \"Unit Price\"\n        },\n        \"type\": \"value\"\n      },\n      {\n        \"id\": \"ValueAxis-2\",\n        \"labels\": {\n          \"filter\": false,\n          \"rotate\": 0,\n          \"show\": true,\n          \"truncate\": 100\n        },\n        \"name\": \"RightAxis-1\",\n        \"position\": \"right\",\n        \"scale\": {\n          \"mode\": \"normal\",\n          \"type\": \"linear\"\n        },\n        \"show\": true,\n        \"style\": {},\n        \"title\": {\n          \"text\": \"\"\n        },\n        \"type\": \"value\"\n      }\n    ]\n  },\n  \"aggs\": [\n    {\n      \"id\": \"1\",\n      \"enabled\": true,\n      \"type\": \"sum\",\n      \"schema\": \"metric\",\n      \"params\": {\n        \"field\": \"UnitPrice\",\n        \"customLabel\": \"Unit Price\"\n      }\n    },\n    {\n      \"id\": \"2\",\n      \"enabled\": true,\n      \"type\": \"date_histogram\",\n      \"schema\": \"segment\",\n      \"params\": {\n        \"field\": \"InvoiceDate\",\n        \"interval\": \"s\",\n        \"customInterval\": \"2h\",\n        \"min_doc_count\": 1,\n        \"extended_bounds\": {},\n        \"customLabel\": \"Transaction Time\"\n      }\n    }\n  ],\n  \"listeners\": {}\n}",
+      "uiStateJSON": "{\n  \"vis\": {\n    \"colors\": {\n      \"Average Quantity\": \"#967302\"\n    }\n  }\n}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"index\": \"pos-transactions-*\",\n  \"query\": {\n    \"query_string\": {\n      \"analyze_wildcard\": true,\n      \"query\": \"*\"\n    }\n  },\n  \"filter\": []\n}"
+      }
+    }
+  },
+  {
+    "_id": "4a8eb9b0-af33-11e7-8b7c-4fc3041cdacb",
+    "_type": "visualization",
+    "_source": {
+      "title": "Rolling Sales Quantity",
+      "visState": "{\n  \"title\": \"Rolling Sales Quantity\",\n  \"type\": \"line\",\n  \"params\": {\n    \"addLegend\": true,\n    \"addTimeMarker\": false,\n    \"addTooltip\": true,\n    \"categoryAxes\": [\n      {\n        \"id\": \"CategoryAxis-1\",\n        \"labels\": {\n          \"show\": true,\n          \"truncate\": 100\n        },\n        \"position\": \"bottom\",\n        \"scale\": {\n          \"type\": \"linear\"\n        },\n        \"show\": true,\n        \"style\": {},\n        \"title\": {\n          \"text\": \"Transaction Time\"\n        },\n        \"type\": \"category\"\n      }\n    ],\n    \"defaultYExtents\": false,\n    \"drawLinesBetweenPoints\": true,\n    \"grid\": {\n      \"categoryLines\": false,\n      \"style\": {\n        \"color\": \"#eee\"\n      },\n      \"valueAxis\": \"ValueAxis-1\"\n    },\n    \"interpolate\": \"linear\",\n    \"legendPosition\": \"bottom\",\n    \"radiusRatio\": 9,\n    \"scale\": \"linear\",\n    \"seriesParams\": [\n      {\n        \"data\": {\n          \"id\": \"3\",\n          \"label\": \"Quantity\"\n        },\n        \"drawLinesBetweenPoints\": true,\n        \"interpolate\": \"cardinal\",\n        \"lineWidth\": 2,\n        \"mode\": \"normal\",\n        \"show\": true,\n        \"showCircles\": true,\n        \"type\": \"line\",\n        \"valueAxis\": \"ValueAxis-1\"\n      }\n    ],\n    \"setYExtents\": false,\n    \"showCircles\": true,\n    \"times\": [],\n    \"valueAxes\": [\n      {\n        \"id\": \"ValueAxis-1\",\n        \"labels\": {\n          \"filter\": false,\n          \"rotate\": 0,\n          \"show\": true,\n          \"truncate\": 100\n        },\n        \"name\": \"LeftAxis-1\",\n        \"position\": \"left\",\n        \"scale\": {\n          \"mode\": \"normal\",\n          \"type\": \"linear\"\n        },\n        \"show\": true,\n        \"style\": {},\n        \"title\": {\n          \"text\": \"Quantity\"\n        },\n        \"type\": \"value\"\n      }\n    ]\n  },\n  \"aggs\": [\n    {\n      \"id\": \"2\",\n      \"enabled\": true,\n      \"type\": \"date_histogram\",\n      \"schema\": \"segment\",\n      \"params\": {\n        \"field\": \"InvoiceDate\",\n        \"interval\": \"s\",\n        \"customInterval\": \"2h\",\n        \"min_doc_count\": 1,\n        \"extended_bounds\": {},\n        \"customLabel\": \"Transaction Time\"\n      }\n    },\n    {\n      \"id\": \"3\",\n      \"enabled\": true,\n      \"type\": \"sum\",\n      \"schema\": \"metric\",\n      \"params\": {\n        \"field\": \"Quantity\",\n        \"customLabel\": \"Quantity\"\n      }\n    }\n  ],\n  \"listeners\": {}\n}",
+      "uiStateJSON": "{\n  \"vis\": {\n    \"colors\": {\n      \"Average Quantity\": \"#967302\"\n    }\n  }\n}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"index\": \"pos-transactions-*\",\n  \"query\": {\n    \"query_string\": {\n      \"analyze_wildcard\": true,\n      \"query\": \"*\"\n    }\n  },\n  \"filter\": []\n}"
+      }
+    }
+  },
+  {
+    "_id": "c1373480-b0d6-11e7-a0e6-cfcd8ad60c5a",
+    "_type": "visualization",
+    "_source": {
+      "title": "Simulate High Risk Transaction",
+      "visState": "{\"title\":\"Simulate High Risk Transaction\",\"type\":\"markdown\",\"params\":{\"markdown\":\"Right click and open this link in a new tab: [Simulate a high risk transaction](http://data-simulator.eu-de.mybluemix.net/simulate_risky_transaction).  Watch the alert for this generated risky transaction show in the chart below within a second or two.\"},\"aggs\":[],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query_string\":{\"query\":\"*\"}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "2975b6b0-af34-11e7-a0e6-cfcd8ad60c5a",
+    "_type": "visualization",
+    "_source": {
+      "title": "Sum of Quantity Sold",
+      "visState": "{\n  \"title\": \"Sum of Quantity Sold\",\n  \"type\": \"metric\",\n  \"params\": {\n    \"handleNoResults\": true,\n    \"fontSize\": \"40\"\n  },\n  \"aggs\": [\n    {\n      \"id\": \"1\",\n      \"enabled\": true,\n      \"type\": \"sum\",\n      \"schema\": \"metric\",\n      \"params\": {\n        \"field\": \"Quantity\",\n        \"customLabel\": \"Number of Units Sold\"\n      }\n    }\n  ],\n  \"listeners\": {}\n}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"index\": \"pos-transactions-*\",\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"*\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
+      }
+    }
+  },
+  {
+    "_id": "b55f6b70-af30-11e7-8129-af4e757783f6",
+    "_type": "visualization",
+    "_source": {
+      "title": "Number of Transactions Processed",
+      "visState": "{\n  \"title\": \"Number of Transactions Processed\",\n  \"type\": \"metric\",\n  \"params\": {\n    \"handleNoResults\": true,\n    \"fontSize\": \"40\"\n  },\n  \"aggs\": [\n    {\n      \"id\": \"1\",\n      \"enabled\": true,\n      \"type\": \"count\",\n      \"schema\": \"metric\",\n      \"params\": {\n        \"customLabel\": \"# Transactions Processed\"\n      }\n    }\n  ],\n  \"listeners\": {}\n}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"index\": \"pos-transactions-*\",\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"*\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
+      }
+    }
+  },
+  {
+    "_id": "94cb8180-af32-11e7-8b7c-4fc3041cdacb",
+    "_type": "visualization",
+    "_source": {
+      "title": "Transaction Count / Datetime",
+      "visState": "{\n  \"title\": \"Transaction Count / Datetime\",\n  \"type\": \"histogram\",\n  \"params\": {\n    \"addLegend\": true,\n    \"addTimeMarker\": false,\n    \"addTooltip\": false,\n    \"categoryAxes\": [\n      {\n        \"id\": \"CategoryAxis-1\",\n        \"labels\": {\n          \"rotate\": 0,\n          \"show\": true,\n          \"truncate\": 100\n        },\n        \"position\": \"bottom\",\n        \"scale\": {\n          \"type\": \"linear\"\n        },\n        \"show\": true,\n        \"style\": {},\n        \"title\": {\n          \"text\": \"Transaction Date/Time\"\n        },\n        \"type\": \"category\"\n      }\n    ],\n    \"defaultYExtents\": false,\n    \"drawLinesBetweenPoints\": true,\n    \"grid\": {\n      \"categoryLines\": false,\n      \"style\": {\n        \"color\": \"#eee\"\n      }\n    },\n    \"interpolate\": \"linear\",\n    \"legendPosition\": \"bottom\",\n    \"radiusRatio\": 9,\n    \"scale\": \"linear\",\n    \"seriesParams\": [\n      {\n        \"data\": {\n          \"id\": \"1\",\n          \"label\": \"Count\"\n        },\n        \"drawLinesBetweenPoints\": true,\n        \"mode\": \"normal\",\n        \"show\": \"true\",\n        \"showCircles\": true,\n        \"type\": \"histogram\",\n        \"valueAxis\": \"ValueAxis-1\"\n      }\n    ],\n    \"setYExtents\": false,\n    \"showCircles\": true,\n    \"times\": [],\n    \"valueAxes\": [\n      {\n        \"id\": \"ValueAxis-1\",\n        \"labels\": {\n          \"filter\": false,\n          \"rotate\": 0,\n          \"show\": true,\n          \"truncate\": 100\n        },\n        \"name\": \"LeftAxis-1\",\n        \"position\": \"left\",\n        \"scale\": {\n          \"mode\": \"normal\",\n          \"type\": \"linear\"\n        },\n        \"show\": true,\n        \"style\": {},\n        \"title\": {},\n        \"type\": \"value\"\n      }\n    ]\n  },\n  \"aggs\": [\n    {\n      \"id\": \"1\",\n      \"enabled\": true,\n      \"type\": \"count\",\n      \"schema\": \"metric\",\n      \"params\": {}\n    },\n    {\n      \"id\": \"2\",\n      \"enabled\": true,\n      \"type\": \"date_histogram\",\n      \"schema\": \"segment\",\n      \"params\": {\n        \"field\": \"InvoiceDate\",\n        \"interval\": \"s\",\n        \"customInterval\": \"2h\",\n        \"min_doc_count\": 1,\n        \"extended_bounds\": {},\n        \"customLabel\": \"Transaction Date/Time\"\n      }\n    }\n  ],\n  \"listeners\": {}\n}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"index\": \"pos-transactions-*\",\n  \"query\": {\n    \"query_string\": {\n      \"analyze_wildcard\": true,\n      \"query\": \"*\"\n    }\n  },\n  \"filter\": []\n}"
+      }
+    }
+  },
+  {
+    "_id": "9388b960-b184-11e7-b307-7fd0a89c3855",
+    "_type": "visualization",
+    "_source": {
+      "title": "Transaction Count",
+      "visState": "{\"title\":\"Transaction Count\",\"type\":\"histogram\",\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"labels\":{\"show\":true,\"truncate\":100},\"position\":\"bottom\",\"scale\":{\"type\":\"linear\"},\"show\":true,\"style\":{},\"title\":{\"text\":\"@timestamp per 3 hours\"},\"type\":\"category\"}],\"defaultYExtents\":false,\"drawLinesBetweenPoints\":true,\"grid\":{\"categoryLines\":false,\"style\":{\"color\":\"#eee\"}},\"interpolate\":\"linear\",\"legendPosition\":\"right\",\"radiusRatio\":9,\"scale\":\"linear\",\"seriesParams\":[{\"data\":{\"id\":\"1\",\"label\":\"Count\"},\"drawLinesBetweenPoints\":true,\"mode\":\"stacked\",\"show\":\"true\",\"showCircles\":true,\"type\":\"histogram\",\"valueAxis\":\"ValueAxis-1\"},{\"show\":true,\"mode\":\"stacked\",\"type\":\"histogram\",\"drawLinesBetweenPoints\":true,\"showCircles\":true,\"interpolate\":\"linear\",\"lineWidth\":2,\"data\":{\"id\":\"2\",\"label\":\"Count\"},\"valueAxis\":\"ValueAxis-1\"}],\"setYExtents\":false,\"showCircles\":true,\"times\":[],\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"labels\":{\"filter\":false,\"rotate\":0,\"show\":true,\"truncate\":100},\"name\":\"LeftAxis-1\",\"position\":\"left\",\"scale\":{\"mode\":\"normal\",\"type\":\"linear\"},\"show\":true,\"style\":{},\"title\":{\"text\":\"\"},\"type\":\"value\"}]},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"3\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"pos-transactions-*\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "9a7858a0-b050-11e7-a0e6-cfcd8ad60c5a",
+    "_type": "visualization",
+    "_source": {
+      "title": "Sum of Revenue",
+      "visState": "{\n  \"title\": \"Sum of Revenue\",\n  \"type\": \"metric\",\n  \"params\": {\n    \"handleNoResults\": true,\n    \"fontSize\": \"40\"\n  },\n  \"aggs\": [\n    {\n      \"id\": \"1\",\n      \"enabled\": true,\n      \"type\": \"sum\",\n      \"schema\": \"metric\",\n      \"params\": {\n        \"field\": \"UnitPrice\",\n        \"customLabel\": \"Total Revenue, GBP\"\n      }\n    }\n  ],\n  \"listeners\": {}\n}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"index\": \"pos-transactions-*\",\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"*\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
+      }
+    }
+  },
+  {
+    "_id": "d72604c0-aff9-11e7-a0e6-cfcd8ad60c5a",
+    "_type": "visualization",
+    "_source": {
+      "title": "Probability of Cancellation > 0.5 (Logistic Regression Machine Learning)",
+      "visState": "{\"aggs\":[{\"enabled\":true,\"id\":\"1\",\"params\":{},\"schema\":\"metric\",\"type\":\"count\"},{\"enabled\":true,\"id\":\"2\",\"params\":{\"customLabel\":\"Probability of Cancellation\",\"field\":\"prob_cancelled\",\"ranges\":[{\"from\":0.5,\"to\":0.6},{\"from\":0.6,\"to\":0.7},{\"from\":0.7,\"to\":0.8},{\"from\":0.8,\"to\":0.9},{\"from\":0.9,\"to\":1}]},\"schema\":\"group\",\"type\":\"range\"},{\"enabled\":true,\"id\":\"3\",\"params\":{\"customInterval\":\"2h\",\"customLabel\":\"Transaction Date/Time\",\"extended_bounds\":{},\"interval\":\"auto\",\"min_doc_count\":1},\"schema\":\"segment\",\"type\":\"date_histogram\"}],\"listeners\":{},\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"labels\":{\"show\":true,\"truncate\":100},\"position\":\"bottom\",\"scale\":{\"type\":\"linear\"},\"show\":true,\"style\":{},\"title\":{\"text\":\"Transaction Date/Time\"},\"type\":\"category\"}],\"defaultYExtents\":false,\"drawLinesBetweenPoints\":true,\"grid\":{\"categoryLines\":false,\"style\":{\"color\":\"#eee\"}},\"interpolate\":\"linear\",\"legendPosition\":\"bottom\",\"radiusRatio\":9,\"scale\":\"linear\",\"seriesParams\":[{\"data\":{\"id\":\"1\",\"label\":\"Count\"},\"drawLinesBetweenPoints\":true,\"mode\":\"stacked\",\"show\":\"true\",\"showCircles\":true,\"type\":\"histogram\",\"valueAxis\":\"ValueAxis-1\"}],\"setYExtents\":false,\"showCircles\":true,\"times\":[],\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"labels\":{\"filter\":false,\"rotate\":0,\"show\":true,\"truncate\":100},\"name\":\"LeftAxis-1\",\"position\":\"left\",\"scale\":{\"mode\":\"normal\",\"type\":\"linear\"},\"show\":true,\"style\":{},\"title\":{\"text\":\"Count\"},\"type\":\"value\"}]},\"title\":\"Probability of Cancellation > 0.5 (Logistic Regression Machine Learning)\",\"type\":\"histogram\"}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"pos-cancellations-*\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[]}"
+      }
+    }
+  }
+]
