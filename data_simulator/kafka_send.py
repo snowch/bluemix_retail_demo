@@ -137,6 +137,10 @@ def load_records(store_num):
 
             for line in tx_f:
 
+                # introduce some variability to the transactions
+                if randint(0, 9) <= 3:
+                    continue
+
                 # load the record - use an OrderedDict to keep the fields in order
                 j = json.loads(line, object_pairs_hook=OrderedDict)
                 tx_dt = datetime.datetime.fromtimestamp(int(j['InvoiceDate'])/1000)
