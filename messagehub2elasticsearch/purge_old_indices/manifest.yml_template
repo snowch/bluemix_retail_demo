@@ -1,0 +1,9 @@
+applications:
+ - name: es-index-manager
+   memory: 64M
+   instances: 1
+   health-check-type: process
+   no-route: true
+   env:
+      ES_URL1: "https://[username]:[password]@[host1]:[port]/"
+      ES_URL2: "https://[username]:[password]@[host2]:[port]/" 
