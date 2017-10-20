@@ -20,28 +20,23 @@ def job():
     print('Starting schedule job')
     client = elasticsearch.Elasticsearch([ ES1,ES2 ], use_ssl=True)
 
-    try:
-       ilo = curator.IndexList(client)
-       ilo.filter_by_regex(kind='prefix', value='pos-transactions-')
-       ilo.filter_by_age(source='name', direction='older', timestring='%Y.%m.%d', unit='days', unit_count=2)
-       delete_indices = curator.DeleteIndices(ilo)
-       delete_indices.do_action()
-    except NoIndices:
-       pass
+    def purge_index(index_name, days_to_keep):
+       try:
+          ilo = curator.IndexList(client)
+          ilo.filter_by_regex(kind='prefix', value=index_name)
+          ilo.filter_by_age(source='name', direction='older', timestring='%Y.%m.%d', unit='days', unit_count=days_to_keep)
+          delete_indices = curator.DeleteIndices(ilo)
+          delete_indices.do_action()
+       except NoIndices:
+          pass
 
-    try:
-       ilo = curator.IndexList(client)
-       ilo.filter_by_regex(kind='prefix', value='pos-cancellations-')
-       ilo.filter_by_age(source='name', direction='older', timestring='%Y.%m.%d', unit='days', unit_count=2)
-       delete_indices = curator.DeleteIndices(ilo)
-       delete_indices.do_action()
-    except NoIndices:
-       pass
+    purge_index('pos-transactions-', 3)
+    purge_index('pos-cancellations-', 3)
 
     print('Finished schedule job')
 
 schedule.every().hour.do(job)
-#schedule.every(5).minutes.do(job)
+#schedule.every(1).minutes.do(job)
 
 while 1:
     schedule.run_pending()
