@@ -99,8 +99,7 @@ def get_consumer(opts):
                          api_version = (0,10),
                          enable_auto_commit = False,
                          auto_offset_reset = 'earliest',
-                         group_id = opts['kafka_group_id'],
-                         #value_deserializer=str.decode
+                         group_id = opts['kafka_group_id']
                          )
 
     consumer.subscribe([ opts['kafka_topic'] ])
