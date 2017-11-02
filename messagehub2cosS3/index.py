@@ -190,6 +190,13 @@ def load_records(opts):
             writer.close()
             #ls_cos(s3client) # for debugging
             #print(offsets) # for debugging
+            
+            # If commit fails to run successfully, we could receive duplicate data in S3 because the offsets will 
+            # get reprocessed. For more information, see:
+            # 
+            # - https://cwiki.apache.org/confluence/display/KAFKA/FAQ#FAQ-HowdoIgetexactly-oncemessagingfromKafka?
+            # 
+            # TODO: provide some examples for making the processing idempotent.
             consumer.commit( offsets )
 
             # reset buffers
