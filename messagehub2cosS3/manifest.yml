@@ -1,0 +1,9 @@
+applications:
+ - name: messagehub2cosS3
+   no-route: true
+   memory: 128M
+   instances: 2
+   health-check-type: process 
+   env:
+      KAFKA_TOPIC: transactions_load
+      KAFKA_GROUP_ID: messagehub2cosS3

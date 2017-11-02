@@ -1,0 +1,6 @@
+export VCAP_SERVICES="{$(cat ../config/message_hub_vcap.json)}"
+export COS_CREDENTIALS="$(cat ../config/cos_s3_endpoint.json)"
+export KAFKA_TOPIC=transactions_load
+export KAFKA_GROUP_ID=messagehub2cosS3
+
+python3 

@@ -1,0 +1,5 @@
+Flask
+kafka
+kafka-python
+boto3==1.4.7
+avro-python3==1.8.2
