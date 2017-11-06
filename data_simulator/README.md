@@ -4,4 +4,4 @@ This project uses the file OpenRetail.json.gz created by the script [data/prepar
 
 Multiple instances of this project can be deployed onto Cloud Foundry.  Each instance represents data from another store.  This approach allows us to easily load test by scaling up the data load through increasing the number of Cloud Foundry instances running the code.
 
-This cloud foundry app requires your message hub instance to be connected to it. After pushing with `cf push`, navigate to the Bkuemix console and the cloud foundry app.  Click on connections and add your Message Hub instance.
+This cloud foundry app requires your message hub instance to be connected to it. After pushing with `cf push`, navigate to the Bluemix console and the cloud foundry app.  Click on connections and add your Message Hub instance.
